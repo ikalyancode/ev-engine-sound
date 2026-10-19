@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0b0e14" />
+    <meta
+      name="description"
+      content="EV Engine Sound — a fully synthesized engine-sound PWA for your EV. V8 muscle, inline-6 sport, or EV spaceship hum, generated live with the Web Audio API. No audio files."
+    />
+    <link rel="icon" type="image/png" href="/icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="EngineSound" />
+    <title>EV Engine Sound</title>
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true"></div>
+          <h1>ENGINE SOUND<small>SYNTHESIZED · OFFLINE PWA</small></h1>
+        </div>
+        <div class="status">
+          <span id="statusDot" class="dot"></span>
+          <span id="statusText">Engine off</span>
+        </div>
+        <button id="installBtn" hidden>Install</button>
+      </header>
+
+      <section class="dash" aria-label="Tachometer">
+        <div id="tachWrap">
+          <svg id="tach" viewBox="0 0 240 240" role="img" aria-label="RPM gauge">
+            <path id="tachBase" class="tach-base" d="" />
+            <path id="redlineArc" class="tach-redline" d="" />
+            <g id="ticks"></g>
+            <g id="needleG">
+              <line x1="120" y1="120" x2="120" y2="40" />
+              <circle cx="120" cy="120" r="9" />
+            </g>
+            <text id="rpmDigital" x="120" y="168">0</text>
+            <text class="rpm-unit" x="120" y="188">RPM</text>
+          </svg>
+        </div>
+        <div class="readouts">
+          <div class="readout">
+            <div class="v"><span id="speedVal">—</span> <span class="u">mph</span></div>
+            <div class="k">SPEED</div>
+          </div>
+          <div class="readout">
+            <div class="v"><span id="gearVal">—</span></div>
+            <div class="k">GEAR</div>
+          </div>
+        </div>
+      </section>
+
+      <button id="startBtn"><span id="startBtnLabel">START ENGINE</span></button>
+
+      <section class="controls">
+        <div class="card">
+          <h2>DRIVE MODE</h2>
+          <div class="mode-row">
+            <button id="modeManual" class="mode-btn active">
+              Manual<small>Throttle slider drives RPM</small>
+            </button>
+            <button id="modeSpeed" class="mode-btn">
+              Follow speed<small>RPM follows GPS speed</small>
+            </button>
+          </div>
+        </div>
+
+        <div class="card" id="throttleWrap">
+          <h2>THROTTLE</h2>
+          <div class="slider-row">
+            <input
+              id="throttle"
+              type="range"
+              min="0"
+              max="100"
+              value="30"
+              step="1"
+              aria-label="Throttle"
+            />
+            <output id="throttleVal" for="throttle">30%</output>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>ENGINE PROFILE</h2>
+          <div id="profiles"></div>
+        </div>
+
+        <div class="card">
+          <h2>MASTER VOLUME</h2>
+          <div class="slider-row">
+            <input
+              id="volume"
+              type="range"
+              min="0"
+              max="100"
+              value="80"
+              step="1"
+              aria-label="Master volume"
+            />
+            <output id="volumeVal" for="volume">80%</output>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="switch-row">
+            <div>
+              <div class="label">Exhaust crackle</div>
+              <div class="hint">Pops on throttle lift-off</div>
+            </div>
+            <label class="switch">
+              <input id="crackleToggle" type="checkbox" checked />
+              <span class="track"></span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        For cabin use — parked, or operated by a passenger. Never operate while
+        driving, and check local noise &amp; distracted-driving laws.
+      </footer>
+    </div>
+
+    <div id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

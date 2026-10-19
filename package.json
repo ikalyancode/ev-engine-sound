@@ -1,0 +1,17 @@
+{
+  "name": "ev-engine-sound",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "prebuild": "node scripts/generate-icons.mjs",
+    "preview": "vite preview --port 4173 --strictPort"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.2",
+    "vite": "^6.0.1",
+    "vite-plugin-pwa": "^0.21.1"
+  }
+}
